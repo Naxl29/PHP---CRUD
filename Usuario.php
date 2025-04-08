@@ -52,14 +52,28 @@ class Usuario
     {
         // Lógica para obtener todos los usuarios
         
-        $query = "SELECT * FROM usuarios";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        $sql = "SELECT 
+        u.primer_nombre,
+        u.segundo_nombre,
+        u.primer_apellido,
+        u.segundo_apellido,
+        u.telefono,
+        TRUNCATE(DATEDIFF(CURRENT_DATE, STR_TO_DATE(u.fecha_nacimiento, '%Y-%m-%d')) / 365.25, 0) AS edad
+        FROM usuarios AS u";
+
+        $resultado = $this->conn->prepare($sql);
+        $resultado->execute();
+        $usuarios = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($usuarios as $usuario) {
+            $nombre_completo = $usuario["primer_nombre"] ." ". $usuario["segundo_nombre"] ." ". $usuario["primer_apellido"] ." ". $usuario["segundo_apellido"];
+            $edad = $usuario["edad"];
+            $telefono = $usuario["telefono"];
+        
+            echo "Nombre: $nombre_completo Edad: $edad años  Teléfono: $telefono\n";
 
     }
-
+    }
     public function obtenerUsuario($id)
     {
         // Lógica para obtener un usuario por ID

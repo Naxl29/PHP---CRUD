@@ -52,7 +52,11 @@ while (true) {
             echo "Usuario creado con éxito.\n";
             break;
 
-            case 4:
+            case 2:
+                $usuarios = $usuario->listarUsuarios();
+                break;
+
+            case 3:
                 echo "Ingrese número de documento del usuario que desea actualizar: ";
                 $usuario->n_documento = trim(fgets(STDIN));
     
@@ -84,7 +88,13 @@ while (true) {
                 echo "Usuario actualizado con éxito.\n";
                 break;
 
-            case 6:
+            case 4:
+                echo "Ingrese el número de documento del usuario que desea eliminar: ";
+                $id = trim(fgets(STDIN));
+                $usuario->eliminarUsuario($id);
+                break;    
+
+            case 5:
                 echo "Saliendo...\n";
                 exit;
     
