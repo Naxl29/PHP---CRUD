@@ -108,5 +108,15 @@ class Usuario
     public function eliminarUsuario($id)
     {
         // Lógica para eliminar un usuario
+        try {
+            $query = "DELETE FROM usuarios WHERE n_documento = ?";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute([$id]);
+            echo "Usuario eliminado con éxito.\n";
+        } catch (Exception $e) {
+            echo "Error al eliminar: " . $e->getMessage() . "\n";
+        } 
+        
+        
     }
 }
