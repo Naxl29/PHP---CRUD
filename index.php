@@ -6,10 +6,9 @@ function menuPrincipal() {
     echo "\n=== MENÚ PRINCIPAL ===\n";
     echo "1. Crear usuario\n";
     echo "2. Listar usuarios\n";
-    echo "3. Obtener usuario por ID\n";
-    echo "4. Actualizar usuario\n";
-    echo "5. Eliminar usuario\n";
-    echo "6. Salir\n";
+    echo "3. Actualizar usuario\n";
+    echo "4. Eliminar usuario\n";
+    echo "5. Salir\n";
     echo "Seleccione una opción: ";
 }
 
