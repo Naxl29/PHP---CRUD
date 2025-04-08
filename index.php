@@ -56,21 +56,25 @@ while (true) {
                 break;
 
             case 3:
-                echo "Ingrese número de documento del usuario que desea actualizar: ";
-                $usuario->n_documento = trim(fgets(STDIN));
-    
+                $usuario->listarUsuarios();
+                echo "Ingrese el ID del usuario que desea actualizar: ";
+                $usuario->id = trim(fgets(STDIN));
+                
                 echo "Ingrese nuevo primer nombre: ";
                 $usuario->primer_nombre = trim(fgets(STDIN));
-    
+                
                 echo "Ingrese nuevo segundo nombre: ";
                 $usuario->segundo_nombre = trim(fgets(STDIN));
-    
+                
                 echo "Ingrese nuevo primer apellido: ";
                 $usuario->primer_apellido = trim(fgets(STDIN));
-    
+                
                 echo "Ingrese nuevo segundo apellido: ";
                 $usuario->segundo_apellido = trim(fgets(STDIN));
-    
+                
+                echo "Ingrese nuevo número de documento: ";
+                $usuario->n_documento = trim(fgets(STDIN));
+
                 echo "Ingrese nueva fecha de nacimiento (YYYY-MM-DD): ";
                 $usuario->fecha_nacimiento = trim(fgets(STDIN));
     
@@ -88,7 +92,8 @@ while (true) {
                 break;
 
             case 4:
-                echo "Ingrese el número de documento del usuario que desea eliminar: ";
+                $usuario->listarUsuarios();
+                echo "Ingrese el ID del usuario que desea eliminar: ";
                 $id = trim(fgets(STDIN));
                 $usuario->eliminarUsuario($id);
                 break;    

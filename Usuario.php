@@ -5,6 +5,7 @@ require_once 'database.php';
 class Usuario
 {
     public PDO $conn;
+    public $id;
     public $primer_nombre;
     public $segundo_nombre;
     public $primer_apellido;
@@ -50,9 +51,8 @@ class Usuario
     }
     public function listarUsuarios()
     {
-        // Lógica para obtener todos los usuarios
-        
         $sql = "SELECT 
+        u.id,
         u.primer_nombre,
         u.segundo_nombre,
         u.primer_apellido,
@@ -66,12 +66,12 @@ class Usuario
         $usuarios = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($usuarios as $usuario) {
+            $id = $usuario["id"];
             $nombre_completo = $usuario["primer_nombre"] ." ". $usuario["segundo_nombre"] ." ". $usuario["primer_apellido"] ." ". $usuario["segundo_apellido"];
             $edad = $usuario["edad"];
             $telefono = $usuario["telefono"];
         
-            echo "Nombre: $nombre_completo Edad: $edad años  Teléfono: $telefono\n";
-
+            echo "ID: $id | Nombre: $nombre_completo | Edad: $edad años | Teléfono: $telefono\n";
     }
     }
     public function obtenerUsuario($id)
@@ -90,28 +90,31 @@ class Usuario
 
     public function actualizarUsuario()
     {
+
         try {
             $stm = $this->conn->prepare("UPDATE usuarios SET 
                 primer_nombre = ?, 
                 segundo_nombre = ?, 
                 primer_apellido = ?, 
                 segundo_apellido = ?, 
+                n_documento = ?,
                 fecha_nacimiento = ?, 
                 telefono = ?, 
                 correo_electronico = ?, 
                 direccion = ?
-                WHERE n_documento = ?");
+                WHERE id = ?");
     
             $stm->execute([
                 $this->primer_nombre,
                 $this->segundo_nombre,
                 $this->primer_apellido,
                 $this->segundo_apellido,
+                $this->n_documento,
                 $this->fecha_nacimiento,
                 $this->telefono,
                 $this->correo_electronico,
                 $this->direccion,
-                $this->n_documento
+                $this->id
             ]);
 
         } catch (Exception $e) {
@@ -121,16 +124,13 @@ class Usuario
 
     public function eliminarUsuario($id)
     {
-        // Lógica para eliminar un usuario
         try {
-            $query = "DELETE FROM usuarios WHERE n_documento = ?";
+            $query = "DELETE FROM usuarios WHERE id = ?";
             $stmt = $this->conn->prepare($query);
             $stmt->execute([$id]);
             echo "Usuario eliminado con éxito.\n";
         } catch (Exception $e) {
             echo "Error al eliminar: " . $e->getMessage() . "\n";
         } 
-        
-        
     }
 }
