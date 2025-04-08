@@ -61,7 +61,33 @@ class Usuario
 
     public function actualizarUsuario()
     {
-        // Lógica para actualizar un usuario
+        try {
+            $stm = $this->conn->prepare("UPDATE usuarios SET 
+                primer_nombre = ?, 
+                segundo_nombre = ?, 
+                primer_apellido = ?, 
+                segundo_apellido = ?, 
+                fecha_nacimiento = ?, 
+                telefono = ?, 
+                correo_electronico = ?, 
+                direccion = ?
+                WHERE n_documento = ?");
+    
+            $stm->execute([
+                $this->primer_nombre,
+                $this->segundo_nombre,
+                $this->primer_apellido,
+                $this->segundo_apellido,
+                $this->fecha_nacimiento,
+                $this->telefono,
+                $this->correo_electronico,
+                $this->direccion,
+                $this->n_documento
+            ]);
+
+        } catch (Exception $e) {
+            echo "Error al actualizar: " . $e->getMessage() . "\n";
+        }
     }
 
     public function eliminarUsuario($id)
