@@ -63,6 +63,14 @@ class Usuario
     public function obtenerUsuario($id)
     {
         // Lógica para obtener un usuario por ID
+
+        $query = "SELECT * FROM usuarios WHERE n_documento = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([$id]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+
+
     }
 
 
