@@ -52,18 +52,23 @@ class Usuario
     public function listarUsuarios()
     {
         $sql = "SELECT 
-        u.id,
-        u.primer_nombre,
-        u.segundo_nombre,
-        u.primer_apellido,
-        u.segundo_apellido,
-        u.telefono,
-        TRUNCATE(DATEDIFF(CURRENT_DATE, STR_TO_DATE(u.fecha_nacimiento, '%Y-%m-%d')) / 365.25, 0) AS edad
-        FROM usuarios AS u";
+            u.id,
+            u.primer_nombre,
+            u.segundo_nombre,
+            u.primer_apellido,
+            u.segundo_apellido,
+            u.telefono,
+            TRUNCATE(DATEDIFF(CURRENT_DATE, STR_TO_DATE(u.fecha_nacimiento, '%Y-%m-%d')) / 365.25, 0) AS edad
+            FROM usuarios AS u";
 
         $resultado = $this->conn->prepare($sql);
         $resultado->execute();
         $usuarios = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        if (empty($usuarios)) {
+            echo "No hay usuarios registrados.\n";
+            return;
+        }
 
         foreach ($usuarios as $usuario) {
             $id = $usuario["id"];
@@ -72,19 +77,7 @@ class Usuario
             $telefono = $usuario["telefono"];
         
             echo "ID: $id | Nombre completo: $nombre_completo | Edad: $edad años | Teléfono: $telefono\n";
-    }
-    }
-    public function obtenerUsuario($id)
-    {
-        // Lógica para obtener un usuario por ID
-
-        $query = "SELECT * FROM usuarios WHERE n_documento = ?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute([$id]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result;
-
-
+        }
     }
 
 
@@ -137,4 +130,27 @@ class Usuario
 
     function validacionVacio($dato) {
         return !empty(trim($dato));
+    }
+
+    function validacionTexto($dato) {
+        return preg_match("/^[a-zA-ZÁÉÍÓÚáéíóúÑñ\s]+$/u", trim($dato));
+    }
+
+    function convertirMayus($dato){
+        return mb_strtoupper(trim($dato), 'UTF-8');
+    }
+
+    function validacionInt($dato) {
+        return ctype_digit($dato); 
+    }
+    
+
+    function validacionFecha($fecha){
+        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
+            return false;
+        }
+
+        list($año, $mes, $dia) = explode('-', $fecha);
+
+        return checkdate((int)$mes, (int)$dia, (int)$año);
     }

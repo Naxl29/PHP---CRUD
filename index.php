@@ -19,38 +19,56 @@ while (true) {
     $option = trim(fgets(STDIN));
 
     switch ($option) {
-        case 1:
+        case 1:        //Crear usuario
             while (true) {
                 echo "Ingrese el primer nombre: ";
                 $dato = trim(fgets(STDIN));
-                if (validacionVacio($dato)) {
+                if (validacionVacio($dato) && validacionTexto($dato)) {
+                    $dato = convertirMayus($dato);
                     break; 
                 }
-                echo "El nombre no puede estar vacío. Inténtelo de nuevo.\n";
+                echo "El nombre no puede estar vacío ni debe contener números. Inténtelo de nuevo.\n";
             }
             $usuario->primer_nombre = $dato;
             
-            echo "Ingrese el segundo nombre: ";
-            $usuario->segundo_nombre = trim(fgets(STDIN));
+            while (true){
+                echo "Ingrese el segundo nombre: ";
+                $dato = trim(fgets(STDIN));
+                if (validacionTexto($dato)){
+                    $dato = convertirMayus($dato);
+                    break;
+                }
+                echo "El segundo no debe contener números. Inténtelo de nuevo. \n";
+            }
+            $usuario->segundo_nombre = $dato;
 
             while (true){
                 echo "Ingrese el primer apellido: ";
                 $dato = trim(fgets(STDIN));
-                if (validacionVacio($dato)) {
+                if (validacionVacio($dato) && validacionTexto($dato)) {
+                    $dato = convertirMayus($dato);
                     break; 
                 }
-                echo "El apellido no puede estar vacío. Inténtelo de nuevo.\n";
+                echo "El apellido no puede estar vacío ni debe contener números. Inténtelo de nuevo.\n";
             }
             $usuario->primer_apellido = $dato;
 
-            echo "Ingrese el segundo apellido: ";
-            $usuario->segundo_apellido = trim(fgets(STDIN));
+            while (true){
+                echo "Ingrese el segundo apellido: ";
+                $dato = trim(fgets(STDIN));
+                if (validacionTexto($dato)){
+                    $dato = convertirMayus($dato);
+                    break;
+                }
+                echo "El segundo apellido no debe contener números. Inténtelo de nuevo. \n";
+            }
+            $usuario->segundo_apellido = $dato;
 
             while (true){
                 echo "Ingrese el número de documento: ";
                 $dato = trim(fgets(STDIN));
-                if (validacionVacio($dato)) {
-                    break;
+                if (validacionVacio($dato) && validacionInt($dato)){
+                    break; 
                 }
                 echo "EL número de documento no puede estar vacío. Inténtelo de nuevo.\n";
             }
@@ -59,8 +77,10 @@ while (true) {
             while (true){
                 echo "Ingrese fecha de nacimiento (YYYY-MM-DD): ";
                 $dato = trim(fgets(STDIN));
-                if (validacionVacio($dato)) {
-                    break;
+                if (validacionVacio($dato) && validacionFecha($dato)){
+                    break; 
+                } else {
+                    echo "Formato inválido (YYYY-MM-DD)";
                 }
                 echo "La fecha de nacimiento no puede estar vacía. Inténtelo de nuevo.\n";
             }
@@ -69,8 +89,8 @@ while (true) {
             while (true){
                 echo "Ingrese el número de teléfono: ";
                 $dato = trim(fgets(STDIN));
-                if (validacionVacio($dato)) {
-                    break;
+                if (validacionVacio($dato) && validacionInt($dato)){
+                    break; 
                 }
                 echo "EL número de teléfono no puede estar vacío. Inténtelo de nuevo.\n";
             }
@@ -79,8 +99,9 @@ while (true) {
             while (true){
                 echo "Ingrese el correo electrónico: ";
                 $dato = trim(fgets(STDIN));
-                if (validacionVacio($dato)) {
-                    break;
+                if (validacionVacio($dato)){
+                    $dato = convertirMayus($dato);
+                    break; 
                 }
                 echo "EL correo electrónico no puede estar vacío. Inténtelo de nuevo.\n";
             }
@@ -89,8 +110,9 @@ while (true) {
             while (true){
                 echo "Ingrese la dirección: ";
                 $dato = trim(fgets(STDIN));
-                if (validacionVacio($dato)) {
-                    break;
+                if (validacionVacio($dato)){
+                    $dato = convertirMayus($dato);
+                    break; 
                 }
                 echo "La dirección no puede estar vacía. Inténtelo de nuevo.\n";
             }
@@ -100,17 +122,17 @@ while (true) {
             echo "Usuario creado con éxito.\n";
             break;
 
-            case 2:
+            case 2:  //Mostrar usuarios
                 $usuarios = $usuario->listarUsuarios();
                 break;
 
-            case 3:
+            case 3:  //Actualizar usuario
                 $usuario->listarUsuarios();
 
                 while (true){
                     echo "Ingrese el ID del usuario que desea actualizar: ";
                     $dato = trim(fgets(STDIN));
-                    if (validacionVacio($dato)) {
+                    if (validacionVacio($dato) && validacionInt($dato)) {
                         break;
                     }
                     echo "EL ID no puede estar vacío. Inténtelo de nuevo.\n";
@@ -120,34 +142,53 @@ while (true) {
                 while (true){
                     echo "Ingrese nuevo primer nombre: ";
                     $dato = trim(fgets(STDIN));
-                    if (validacionVacio($dato)) {
-                        break;
+                    if (validacionVacio($dato) && validacionTexto($dato)) {
+                        $dato = convertirMayus($dato);
+                        break; 
                     }
-                    echo "EL primer nombre no puede estar vacío. Inténtelo de nuevo.\n";
+                    echo "EL primer nombre no puede estar vacío ni debe contener números. Inténtelo de nuevo.\n";
                 }
                 $usuario->primer_nombre = $dato;
                 
-                echo "Ingrese nuevo segundo nombre: ";
-                $usuario->segundo_nombre = trim(fgets(STDIN));
+
+                while (true){
+                    echo "Ingrese nuevo segundo nombre: ";
+                    $dato = trim(fgets(STDIN));
+                    if (validacionTexto($dato)){
+                        $dato = convertirMayus($dato);
+                        break;
+                    }
+                    echo "El segundo no debe contener números. Inténtelo de nuevo. \n";
+                }
+                $usuario->segundo_nombre = $dato;
                 
                 while (true){
                     echo "Ingrese nuevo primer apellido: ";
                     $dato = trim(fgets(STDIN));
-                    if (validacionVacio($dato)) {
-                        break;
+                    if (validacionVacio($dato) && validacionTexto($dato)) {
+                        $dato = convertirMayus($dato);
+                        break; 
                     }
-                    echo "EL primer apellido no puede estar vacío. Inténtelo de nuevo.\n";
+                    echo "EL primer apellido no puede estar vacío ni debe contener números. Inténtelo de nuevo.\n";
                 }
                 $usuario->primer_apellido = $dato;
                 
-                echo "Ingrese nuevo segundo apellido: ";
-                $usuario->segundo_apellido = trim(fgets(STDIN));
+                while (true){
+                    echo "Ingrese nuevo segundo apellido: ";
+                    $dato = trim(fgets(STDIN));
+                    if (validacionTexto($dato)){
+                        $dato = convertirMayus($dato);
+                        break;
+                    }
+                    echo "El segundo no debe contener números. Inténtelo de nuevo. \n";
+                }
+                $usuario->segundo_nombre = $dato;
                 
                 while (true){
                     echo "Ingrese nuevo número de documento: ";
                     $dato = trim(fgets(STDIN));
-                    if (validacionVacio($dato)) {
-                        break;
+                    if (validacionVacio($dato) && validacionInt($dato)) {
+                        break; 
                     }
                     echo "EL número de documento no puede estar vacío. Inténtelo de nuevo.\n";
                 }
@@ -156,8 +197,10 @@ while (true) {
                 while (true){
                     echo "Ingrese nueva fecha de nacimiento (YYYY-MM-DD): ";
                     $dato = trim(fgets(STDIN));
-                    if (validacionVacio($dato)) {
-                        break;
+                    if (validacionVacio($dato) && validacionFecha($dato)){
+                        break; 
+                    } else {
+                        echo "Formato inválido (YYYY-MM-DD)";
                     }
                     echo "La fecha de nacimiento no puede estar vacía. Inténtelo de nuevo.\n";
                 }
@@ -166,8 +209,8 @@ while (true) {
                 while (true){
                     echo "Ingrese nuevo teléfono: ";
                     $dato = trim(fgets(STDIN));
-                    if (validacionVacio($dato)) {
-                        break;
+                    if (validacionVacio($dato) && validacionInt($dato)) {
+                        break; 
                     }
                     echo "EL número de teléfono no puede estar vacío. Inténtelo de nuevo.\n";
                 }
@@ -176,8 +219,9 @@ while (true) {
                 while (true){
                     echo "Ingrese nuevo correo electrónico: ";
                     $dato = trim(fgets(STDIN));
-                    if (validacionVacio($dato)) {
-                        break;
+                    if (validacionVacio($dato)){
+                        $dato = convertirMayus($dato);
+                        break; 
                     }
                     echo "EL correo electrónico no puede estar vacío. Inténtelo de nuevo.\n";
                 }
@@ -186,8 +230,9 @@ while (true) {
                 while (true){
                     echo "Ingrese nueva dirección: ";
                     $dato = trim(fgets(STDIN));
-                    if (validacionVacio($dato)) {
-                        break;
+                    if (validacionVacio($dato)){
+                        $dato = convertirMayus($dato);
+                        break; 
                     }
                     echo "La dirección no puede estar vacía. Inténtelo de nuevo.\n";
                 }
@@ -197,13 +242,13 @@ while (true) {
                 echo "Usuario actualizado con éxito.\n";
                 break;
 
-            case 4:
+            case 4:  //Eliminar usuario
                 $usuario->listarUsuarios();
 
                 while (true){
                     echo "Ingrese el ID del usuario que desea eliminar: ";
                     $dato = trim(fgets(STDIN));
-                    if (validacionVacio($dato)) {
+                    if (validacionVacio($dato) && validacionInt($dato)) {
                         break;
                     }
                     echo "EL ID no puede estar vacío. Inténtelo de nuevo.\n";
@@ -212,7 +257,7 @@ while (true) {
                 $usuario->eliminarUsuario($id);
                 break;    
 
-            case 5:
+            case 5:  //Salir
                 echo "Saliendo...\n";
                 exit;
     
