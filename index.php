@@ -20,32 +20,81 @@ while (true) {
 
     switch ($option) {
         case 1:
-            echo "Ingrese primer nombre: ";
-            $usuario->primer_nombre = trim(fgets(STDIN));
-
-            echo "Ingrese segundo nombre: ";
+            while (true) {
+                echo "Ingrese el primer nombre: ";
+                $dato = trim(fgets(STDIN));
+                if (validacionVacio($dato)) {
+                    break; 
+                }
+                echo "El nombre no puede estar vacío. Inténtelo de nuevo.\n";
+            }
+            $usuario->primer_nombre = $dato;
+            
+            echo "Ingrese el segundo nombre: ";
             $usuario->segundo_nombre = trim(fgets(STDIN));
 
-            echo "Ingrese primer apellido: ";
-            $usuario->primer_apellido = trim(fgets(STDIN));
+            while (true){
+                echo "Ingrese el primer apellido: ";
+                $dato = trim(fgets(STDIN));
+                if (validacionVacio($dato)) {
+                    break; 
+                }
+                echo "El apellido no puede estar vacío. Inténtelo de nuevo.\n";
+            }
+            $usuario->primer_apellido = $dato;
 
-            echo "Ingrese segundo apellido: ";
+            echo "Ingrese el segundo apellido: ";
             $usuario->segundo_apellido = trim(fgets(STDIN));
 
-            echo "Ingrese número de documento: ";
-            $usuario->n_documento = trim(fgets(STDIN));
+            while (true){
+                echo "Ingrese el número de documento: ";
+                $dato = trim(fgets(STDIN));
+                if (validacionVacio($dato)) {
+                    break;
+                }
+                echo "EL número de documento no puede estar vacío. Inténtelo de nuevo.\n";
+            }
+            $usuario->n_documento = $dato;
 
-            echo "Ingrese fecha de nacimiento (YYYY-MM-DD): ";
-            $usuario->fecha_nacimiento = trim(fgets(STDIN));
+            while (true){
+                echo "Ingrese fecha de nacimiento (YYYY-MM-DD): ";
+                $dato = trim(fgets(STDIN));
+                if (validacionVacio($dato)) {
+                    break;
+                }
+                echo "La fecha de nacimiento no puede estar vacía. Inténtelo de nuevo.\n";
+            }
+            $usuario->fecha_nacimiento = $dato;
 
-            echo "Ingrese teléfono: ";
-            $usuario->telefono = trim(fgets(STDIN));
+            while (true){
+                echo "Ingrese el número de teléfono: ";
+                $dato = trim(fgets(STDIN));
+                if (validacionVacio($dato)) {
+                    break;
+                }
+                echo "EL número de teléfono no puede estar vacío. Inténtelo de nuevo.\n";
+            }
+            $usuario->telefono = $dato;
 
-            echo "Ingrese correo electrónico: ";
-            $usuario->correo_electronico = trim(fgets(STDIN));
+            while (true){
+                echo "Ingrese el correo electrónico: ";
+                $dato = trim(fgets(STDIN));
+                if (validacionVacio($dato)) {
+                    break;
+                }
+                echo "EL correo electrónico no puede estar vacío. Inténtelo de nuevo.\n";
+            }
+            $usuario->correo_electronico = $dato;
 
-            echo "Ingrese dirección: ";
-            $usuario->direccion = trim(fgets(STDIN));
+            while (true){
+                echo "Ingrese la dirección: ";
+                $dato = trim(fgets(STDIN));
+                if (validacionVacio($dato)) {
+                    break;
+                }
+                echo "La dirección no puede estar vacía. Inténtelo de nuevo.\n";
+            }
+            $usuario->direccion = $dato;
 
             $usuario->crearUsuario();
             echo "Usuario creado con éxito.\n";
@@ -57,35 +106,92 @@ while (true) {
 
             case 3:
                 $usuario->listarUsuarios();
-                echo "Ingrese el ID del usuario que desea actualizar: ";
-                $usuario->id = trim(fgets(STDIN));
+
+                while (true){
+                    echo "Ingrese el ID del usuario que desea actualizar: ";
+                    $dato = trim(fgets(STDIN));
+                    if (validacionVacio($dato)) {
+                        break;
+                    }
+                    echo "EL ID no puede estar vacío. Inténtelo de nuevo.\n";
+                }
+                $usuario->id = $dato;
                 
-                echo "Ingrese nuevo primer nombre: ";
-                $usuario->primer_nombre = trim(fgets(STDIN));
+                while (true){
+                    echo "Ingrese nuevo primer nombre: ";
+                    $dato = trim(fgets(STDIN));
+                    if (validacionVacio($dato)) {
+                        break;
+                    }
+                    echo "EL primer nombre no puede estar vacío. Inténtelo de nuevo.\n";
+                }
+                $usuario->primer_nombre = $dato;
                 
                 echo "Ingrese nuevo segundo nombre: ";
                 $usuario->segundo_nombre = trim(fgets(STDIN));
                 
-                echo "Ingrese nuevo primer apellido: ";
-                $usuario->primer_apellido = trim(fgets(STDIN));
+                while (true){
+                    echo "Ingrese nuevo primer apellido: ";
+                    $dato = trim(fgets(STDIN));
+                    if (validacionVacio($dato)) {
+                        break;
+                    }
+                    echo "EL primer apellido no puede estar vacío. Inténtelo de nuevo.\n";
+                }
+                $usuario->primer_apellido = $dato;
                 
                 echo "Ingrese nuevo segundo apellido: ";
                 $usuario->segundo_apellido = trim(fgets(STDIN));
                 
-                echo "Ingrese nuevo número de documento: ";
-                $usuario->n_documento = trim(fgets(STDIN));
+                while (true){
+                    echo "Ingrese nuevo número de documento: ";
+                    $dato = trim(fgets(STDIN));
+                    if (validacionVacio($dato)) {
+                        break;
+                    }
+                    echo "EL número de documento no puede estar vacío. Inténtelo de nuevo.\n";
+                }
+                $usuario->n_documento = $dato;
 
-                echo "Ingrese nueva fecha de nacimiento (YYYY-MM-DD): ";
-                $usuario->fecha_nacimiento = trim(fgets(STDIN));
+                while (true){
+                    echo "Ingrese nueva fecha de nacimiento (YYYY-MM-DD): ";
+                    $dato = trim(fgets(STDIN));
+                    if (validacionVacio($dato)) {
+                        break;
+                    }
+                    echo "La fecha de nacimiento no puede estar vacía. Inténtelo de nuevo.\n";
+                }
+                $usuario->fecha_nacimiento = $dato;
+
+                while (true){
+                    echo "Ingrese nuevo teléfono: ";
+                    $dato = trim(fgets(STDIN));
+                    if (validacionVacio($dato)) {
+                        break;
+                    }
+                    echo "EL número de teléfono no puede estar vacío. Inténtelo de nuevo.\n";
+                }
+                $usuario->telefono = $dato;
+
+                while (true){
+                    echo "Ingrese nuevo correo electrónico: ";
+                    $dato = trim(fgets(STDIN));
+                    if (validacionVacio($dato)) {
+                        break;
+                    }
+                    echo "EL correo electrónico no puede estar vacío. Inténtelo de nuevo.\n";
+                }
+                $usuario->correo_electronico = $dato;
     
-                echo "Ingrese nuevo teléfono: ";
-                $usuario->telefono = trim(fgets(STDIN));
-    
-                echo "Ingrese nuevo correo electrónico: ";
-                $usuario->correo_electronico = trim(fgets(STDIN));
-    
-                echo "Ingrese nueva dirección: ";
-                $usuario->direccion = trim(fgets(STDIN));
+                while (true){
+                    echo "Ingrese nueva dirección: ";
+                    $dato = trim(fgets(STDIN));
+                    if (validacionVacio($dato)) {
+                        break;
+                    }
+                    echo "La dirección no puede estar vacía. Inténtelo de nuevo.\n";
+                }
+                $usuario->direccion = $dato;
     
                 $usuario->actualizarUsuario();
                 echo "Usuario actualizado con éxito.\n";
@@ -93,8 +199,16 @@ while (true) {
 
             case 4:
                 $usuario->listarUsuarios();
-                echo "Ingrese el ID del usuario que desea eliminar: ";
-                $id = trim(fgets(STDIN));
+
+                while (true){
+                    echo "Ingrese el ID del usuario que desea eliminar: ";
+                    $dato = trim(fgets(STDIN));
+                    if (validacionVacio($dato)) {
+                        break;
+                    }
+                    echo "EL ID no puede estar vacío. Inténtelo de nuevo.\n";
+                }
+                $id = $dato;
                 $usuario->eliminarUsuario($id);
                 break;    
 

@@ -71,7 +71,7 @@ class Usuario
             $edad = $usuario["edad"];
             $telefono = $usuario["telefono"];
         
-            echo "ID: $id | Nombre: $nombre_completo | Edad: $edad años | Teléfono: $telefono\n";
+            echo "ID: $id | Nombre completo: $nombre_completo | Edad: $edad años | Teléfono: $telefono\n";
     }
     }
     public function obtenerUsuario($id)
@@ -134,3 +134,7 @@ class Usuario
         } 
     }
 }
+
+    function validacionVacio($dato) {
+        return !empty(trim($dato));
+    }
