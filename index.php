@@ -34,11 +34,11 @@ while (true) {
             while (true){
                 echo "Ingrese el segundo nombre: ";
                 $dato = trim(fgets(STDIN));
-                if (validacionTexto($dato)){
+                if ($dato === "" || validacionTexto($dato)){
                     $dato = convertirMayus($dato);
                     break;
                 }
-                echo "El segundo no debe contener números. Inténtelo de nuevo. \n";
+                echo "El segundo nombre solo debe contener letras. Inténtelo de nuevo. \n";
             }
             $usuario->segundo_nombre = $dato;
 
@@ -56,7 +56,7 @@ while (true) {
             while (true){
                 echo "Ingrese el segundo apellido: ";
                 $dato = trim(fgets(STDIN));
-                if (validacionTexto($dato)){
+                if ($dato === "" || validacionTexto($dato)){
                     $dato = convertirMayus($dato);
                     break;
                 }
@@ -70,7 +70,7 @@ while (true) {
                 if (validacionVacio($dato) && validacionInt($dato)){
                     break; 
                 }
-                echo "EL número de documento no puede estar vacío. Inténtelo de nuevo.\n";
+                echo "EL número de documento no puede estar vacío ni puede contener letras. Inténtelo de nuevo.\n";
             }
             $usuario->n_documento = $dato;
 
@@ -92,7 +92,7 @@ while (true) {
                 if (validacionVacio($dato) && validacionInt($dato)){
                     break; 
                 }
-                echo "EL número de teléfono no puede estar vacío. Inténtelo de nuevo.\n";
+                echo "EL número de teléfono no puede estar vacío ni debe contener letras. Inténtelo de nuevo.\n";
             }
             $usuario->telefono = $dato;
 
@@ -150,11 +150,10 @@ while (true) {
                 }
                 $usuario->primer_nombre = $dato;
                 
-
                 while (true){
                     echo "Ingrese nuevo segundo nombre: ";
                     $dato = trim(fgets(STDIN));
-                    if (validacionTexto($dato)){
+                    if ($dato === "" || validacionTexto($dato)){
                         $dato = convertirMayus($dato);
                         break;
                     }
@@ -174,15 +173,15 @@ while (true) {
                 $usuario->primer_apellido = $dato;
                 
                 while (true){
-                    echo "Ingrese nuevo segundo apellido: ";
+                    echo "Ingrese el segundo nombre: ";
                     $dato = trim(fgets(STDIN));
-                    if (validacionTexto($dato)){
+                    if ($dato === "" || validacionTexto($dato)){
                         $dato = convertirMayus($dato);
                         break;
                     }
-                    echo "El segundo no debe contener números. Inténtelo de nuevo. \n";
+                    echo "El segundo nombre solo debe contener letras. Inténtelo de nuevo. \n";
                 }
-                $usuario->segundo_nombre = $dato;
+                $usuario->segundo_apellido = $dato;
                 
                 while (true){
                     echo "Ingrese nuevo número de documento: ";

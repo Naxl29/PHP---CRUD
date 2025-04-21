@@ -82,38 +82,37 @@ class Usuario
 
 
     public function actualizarUsuario()
-    {
+{
+    try {
+        $stm = $this->conn->prepare("UPDATE usuarios SET
+            primer_nombre = ?,
+            segundo_nombre = ?,
+            primer_apellido = ?,
+            segundo_apellido = ?,
+            n_documento = ?,
+            fecha_nacimiento = ?,
+            telefono = ?,
+            correo_electronico = ?,
+            direccion = ?
+            WHERE id = ?");
 
-        try {
-            $stm = $this->conn->prepare("UPDATE usuarios SET 
-                primer_nombre = ?, 
-                segundo_nombre = ?, 
-                primer_apellido = ?, 
-                segundo_apellido = ?, 
-                n_documento = ?,
-                fecha_nacimiento = ?, 
-                telefono = ?, 
-                correo_electronico = ?, 
-                direccion = ?
-                WHERE id = ?");
-    
-            $stm->execute([
-                $this->primer_nombre,
-                $this->segundo_nombre,
-                $this->primer_apellido,
-                $this->segundo_apellido,
-                $this->n_documento,
-                $this->fecha_nacimiento,
-                $this->telefono,
-                $this->correo_electronico,
-                $this->direccion,
-                $this->id
-            ]);
+        $stm->execute([
+            $this->primer_nombre,
+            $this->segundo_nombre,
+            $this->primer_apellido,
+            $this->segundo_apellido,
+            $this->n_documento,
+            $this->fecha_nacimiento,
+            $this->telefono,
+            $this->correo_electronico,
+            $this->direccion,
+            $this->id
+        ]);
 
-        } catch (Exception $e) {
-            echo "Error al actualizar: " . $e->getMessage() . "\n";
-        }
+    } catch (Exception $e) {
+        echo "Error al actualizar: " . $e->getMessage() . "\n";
     }
+}
 
     public function eliminarUsuario($id)
     {
@@ -140,6 +139,7 @@ class Usuario
         return mb_strtoupper(trim($dato), 'UTF-8');
     }
 
+    
     function validacionInt($dato) {
         return ctype_digit($dato); 
     }
